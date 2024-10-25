@@ -1,22 +1,9 @@
 const { Router } = require("express");
-const {
-  fileGet,
-  filePost,
-  filePut,
-  fileDelete,
-  uploadFile,
-} = require("../controllers/files");
+const { uploadFile } = require("../controllers/files");
+const { validatorJWT } = require("../middleware/validatorJWT");
 
 const router = Router();
 
-router.get("/", fileGet);
-
-router.put("/:id", filePut);
-
-router.post("/", filePost);
-
-router.delete("/", fileDelete);
-
-router.post("/upload", uploadFile);
+router.post("/upload", validatorJWT, uploadFile);
 
 module.exports = router;
